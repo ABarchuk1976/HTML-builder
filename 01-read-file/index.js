@@ -1,7 +1,6 @@
 const path = require('path');
-const fsAsync = require('fs/promises');
+const fsAsync = require('fs').promises;
 
-const TASK = '01-read-file';
 const TASK_FILE = 'text.txt';
 const filePath = path.join(__dirname, `${TASK_FILE}`);
 const text = [];
