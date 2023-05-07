@@ -15,7 +15,7 @@ const writeStream = async (filePath) => {
   );
 
   inputLine.on('line', async (line) => {
-    if (line === 'exit') exit();
+    if (line.trim() === 'exit') exit();
     await fsAsync.appendFile(filePath, line + '\n');
   });
 
