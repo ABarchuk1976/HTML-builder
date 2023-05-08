@@ -21,6 +21,7 @@ const createHTML = async (createOptions) => {
   const { tempFile, componentsPath, htmlFile } = createOptions;
 
   await fsAsync.appendFile(htmlFile, '');
+  await fsAsync.writeFile(htmlFile, '');
 
   const tempData = await fsAsync.readFile(tempFile);
   const fragments = tempData.toString().split('{{');
@@ -63,6 +64,7 @@ const copyDir = async (copyOptions) => {
 const stylesBundle = async (bundleOptions) => {
   const { stylesPath, stylesFile } = bundleOptions;
   const files = await fsAsync.readdir(stylesPath, { withFileTypes: true });
+
   await fsAsync.appendFile(stylesFile, '');
   await fsAsync.writeFile(stylesFile, '');
 

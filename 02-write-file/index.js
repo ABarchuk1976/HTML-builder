@@ -8,6 +8,8 @@ const filePath = path.join(__dirname, `${TASK_FILE}`);
 
 const writeStream = async (filePath) => {
   await fsAsync.appendFile(filePath, '');
+  await fsAsync.writeFile(filePath, '');
+
   const inputLine = readline.createInterface({ input, output });
 
   output.write(

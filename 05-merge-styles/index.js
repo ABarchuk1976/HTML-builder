@@ -13,12 +13,13 @@ const stylesBundle = async (bundleOptions) => {
 
   await fsAsync.mkdir(distPath, { recursive: true });
   const files = await fsAsync.readdir(stylesPath, { withFileTypes: true });
+
   await fsAsync.appendFile(stylesFile, '');
   await fsAsync.writeFile(stylesFile, '');
 
   files.forEach(async (file) => {
     if (file.isFile() && path.extname(file.name) === '.css') {
-      const data = await fsAsync.readFile(stylesPath + '/' + file.name);
+      const data = await fsAsync.readFile(path.join(stylesPath, file.name));
       await fsAsync.appendFile(stylesFile, data);
     }
   });
