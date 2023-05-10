@@ -41,7 +41,8 @@ const createHTML = async (createOptions) => {
 
 const copyDir = async (copyOptions) => {
   const { sourcePath, copyPath } = copyOptions;
-  await fsAsync.mkdir(copyPath, { recursive: true });
+  await fsAsync.rm(copyPath, { recursive: true, force: true });
+  await fsAsync.mkdir(copyPath, { recursive: true, force: true });
 
   const files = await fsAsync.readdir(sourcePath);
 
