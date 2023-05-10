@@ -6,7 +6,8 @@ const copyPath = path.join(__dirname, 'files-copy');
 
 const copyDir = async (copyOptions) => {
   const { sourcePath, copyPath } = copyOptions;
-  await fsAsync.mkdir(copyPath, { recursive: true });
+  await fsAsync.rm(copyPath, { recursive: true, force: true });
+  await fsAsync.mkdir(copyPath, { recursive: true, force: true });
 
   const files = await fsAsync.readdir(sourcePath);
 
@@ -17,11 +18,7 @@ const copyDir = async (copyOptions) => {
     const stats = await fsAsync.stat(filePath);
 
     if (stats.isFile()) {
-      const data = await fsAsync.readFile(filePath);
-
-      await fsAsync.writeFile(fileCopyPath, data);
-    } else {
-      await copyDir({ sourcePath: filePath, copyPath: fileCopyPath });
+      fsAsync.copyFile(filePath, fileCopyPath);
     }
   });
 };
